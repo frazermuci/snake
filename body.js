@@ -1,6 +1,6 @@
 //used to move x or y coordinate appropriately
 //according to that body's direction
-function moveByDirection(body)
+/*function moveByDirection(body)
 {
 	switch(body.direction)
 	{
@@ -26,11 +26,41 @@ function moveByDirection(body)
 		}
 	}
 }
+*/
+function moveByDirection(x, y, dir)
+{
+	var dx = x;
+	var	dy = y;
+	switch(dir)
+	{
+		case direction.UP:
+		{
+			dy = y+1;
+			break;
+		}
+		case direction.DOWN:
+		{
+			dy = y-1;
+			break;
+		}
+		case direction.LEFT:
+		{
+			dx = x-1;
+			break;
+		}
+		case direction.RIGHT:
+		{	
+			dx = x+1;
+			break;
+		}
+	}
+	return [dx,dy];
+}
 
 //generates function that progresses a body
 function giveProgress(body)
 {
-	var func = function(snake)
+	/*var func = function(snake)
 	{
 		//first moves x or y coord
 		moveByDirection(body);
@@ -49,6 +79,18 @@ function giveProgress(body)
 				}
 			}
 		}
+	}*/
+	var func = function(snake)
+	{
+		var head = snake.body[0];
+		var xy = moveByDirection(head.x, head.y, head.direction);
+		for(var i = 1; i < snake.body.length; i++)
+		{
+			snake.body[i].x = snake.body[i-1].x
+			snake.body[i].y = snake.body[i-1].y
+		}
+		head.x = xy[0];
+		head.y = xy[1];
 	}
 	return func;
 }
