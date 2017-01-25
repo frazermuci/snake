@@ -4,13 +4,13 @@
 var direction = {UP:1, DOWN:2, LEFT:3, RIGHT:4};
 
 //initializes bodyList
-function genBodyList(snake)//start at some coords
+function genBodyList()//start at some coords
 {
 	b1 = new Body(4,3,"black",direction.RIGHT);
 	b2 = new Body(3,3,"black",direction.RIGHT);
 	b3 = new Body(2,3,"black",direction.RIGHT);
 	b3.isLast =1;
-	snake.bodyList = [b1,b2,b3];
+	return  [b1,b2,b3];
 }
 
 //generates function addBody which adds body to bodyList
@@ -21,7 +21,7 @@ function giveAddBody(snake)//add in oppo direction of last body. Edge case:
 	//probs don't wanna pass in body, probs just construct new body huh.
 	var func = function(body)
 	{
-		snake.body[snake.bodyList.length-1].isLast = 0;
+		snake.body[snake.body.length-1].isLast = 0;
 		body.isLast = 1;
 		snake.body = snake.body.concat([body]);
 	}
@@ -58,7 +58,7 @@ function giveChangeDirection(snake)
 {
 	var func = function(direction)
 	{
-		body = snake.bodyList[0];
+		body = snake.body[0];
 		body.direction = direction;
 		snake.XYQueue = snake.XYQueue.concat([body.x, body.y, direction]);
 	}
@@ -69,11 +69,11 @@ function giveChangeDirection(snake)
 function Snake()
 {
 	//maybe initialize with two or three and don't pass in
-	this.body = genBodyList(this);
+	this.body = genBodyList();
 	this.XYQueue = [];
 	this.changeDirection = giveChangeDirection(this);
 	this.addBody = giveAddBody(this);
 	this.addXY = giveAddXY(this);
-	this.removeXY = function(){this.bodyList = this.bodyList.pop();}
+	this.removeXY = function(){this.body = this.body.pop();}
 	this.move = giveMove(this);
 };
