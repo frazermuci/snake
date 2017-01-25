@@ -1,39 +1,6 @@
 //this is the snake.
 
-//enum that defines directions
-var direction = {UP:1, DOWN:2, LEFT:3, RIGHT:4};
 
-function changeXYAddBody(x, y, dir)//edge case what happens when
-										 //growth happens and hits a solid object
-										 //it would be use alt and make turning point
-{
-	var dx = x;
-	var	dy = y;
-	switch(dir)
-	{
-		case direction.UP:
-		{
-			dy = y-1;
-			break;
-		}
-		case direction.DOWN:
-		{
-			dy = y+1;
-			break;
-		}
-		case direction.LEFT:
-		{
-			dx = x+1;
-			break;
-		}
-		case direction.RIGHT:
-		{	
-			dx = x-1;
-			break;
-		}
-	}
-	return [dx,dy];
-}
 
 //initializes bodyList
 function genBodyList(x, y, direction)//start at some coords and do not hard code
@@ -44,7 +11,7 @@ function genBodyList(x, y, direction)//start at some coords and do not hard code
 	var xy;
 	for(var i = 0; i< 3; i++)
 	{
-		body = body.concat([new Body(dx, dy, "black", direction)]);
+		body = body.concat([new Body(dx, dy, "black")]);
 		xy = changeXYAddBody(dx,dy,direction);
 		dx = xy[0];
 		dy = xy[1];
@@ -70,22 +37,10 @@ function giveAddBody(snake)//add in oppo direction of last body. Edge case:
 		lastBody.isLast = 0;
 		x = lastBody.x;
 		y = lastBody.y;
-		direction = lastBody.direction;
-		var xy = changeXYAddBody(x,y,direction);
-		body = new Body(xy[0], xy[1], "black", direction);
+		var xy = changeXYAddBody(x,y,snake.direction);
+		body = new Body(xy[0], xy[1], "black");
 		body.isLast = 1;
 		snake.body = snake.body.concat([body]);
-	}
-	return func;
-}
-
-//generates function addXY which adds a "turning point"
-//to XYQueue
-function giveAddXY(snake)
-{
-	var func = function(x,y,direction)
-	{
-		snake.XYQueue = [[x,y,direction]].concat(snake.XYQueue);
 	}
 	return func;
 }
@@ -96,12 +51,8 @@ function giveMove(snake)
 {
 	var func = function()
 	{
-		//for(var i = 0; i < snake.body.length; i++)
-		//{
-		//	snake.body[i].progress(snake);
-		//}
 		var head = snake.body[0];
-		var xy = moveByDirection(head.x, head.y, head.direction);
+		var xy = moveByDirection(head.x, head.y, snake.direction);
 		for(var i = snake.body.length-1; i != 0; i--)
 		{
 			snake.body[i].x = snake.body[i-1].x;
@@ -109,7 +60,6 @@ function giveMove(snake)
 		}
 		head.x = xy[0];
 		head.y = xy[1];
-		console.log(snake.body)
 		
 	}
 	return func;
@@ -121,8 +71,7 @@ function giveChangeDirection(snake)
 	var func = function(direction)
 	{
 		body = snake.body[0];
-		body.direction = direction;
-		snake.XYQueue = snake.XYQueue.concat([body.x, body.y, direction]);
+		snake.direction = direction;
 	}
 	return func;
 }
@@ -132,10 +81,8 @@ function Snake(x, y, direction)
 {
 	//maybe initialize with two or three and don't pass in
 	this.body = genBodyList(x, y, direction);
-	this.XYQueue = [];
+	this.direction = direction;
 	this.changeDirection = giveChangeDirection(this);
 	this.addBody = giveAddBody(this);
-	this.addXY = giveAddXY(this);
-	this.removeXY = function(){this.XYQueue = this.XYQueue.pop();}
 	this.move = giveMove(this);
 };

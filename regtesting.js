@@ -1,4 +1,4 @@
-function printAllBody(s)
+/*function printAllBody(s)
 {
 	for(var i = 0; i < s.body.length; i++)
 	{
@@ -6,7 +6,7 @@ function printAllBody(s)
 		console.log(s.body[i].y);
 	}
 }
-/*function regTest1()
+function regTest1()
 {
 	console.log("test init for snake and body")
 	console.log("init");
@@ -25,20 +25,7 @@ function printAllBody(s)
 
 regTest1();
 */
-/*
-function testInitBody()
-{}
-function testBodyProgress()
-{}
-function testChangeDirectionBody()
-{}
-function testSnakeAddBody()
-{}
-function testAddXY()
-{}
-function testRemoveXY()
-{}
-*/
+
 
 function testInitSnake()
 {
@@ -48,13 +35,22 @@ function testInitSnake()
 		console.assert(s.body[k].x == 4 - k && s.body[k].y == 4,
 		"initialization incorrect: xy", 
 		s.body[k]);
-		console.assert(s.body[k].direction == 4,
-		"initialization incorrect: direction", 
-		s.body[k]);
 	}
 	console.assert(s.body[s.body.length-1].isLast);
 }
 testInitSnake();
+
+function testSnakeAddBody()
+{
+	var s = new Snake(4,4,4);
+	s.addBody();
+	console.assert(s.body[3].isLast);
+	console.assert(s.body[3].x == 1 && s.body[3].y == 4);
+}
+
+testSnakeAddBody()
+{}
+
 function testSnakeMove()
 {
 	var s = new Snake(4,4,4);
@@ -79,7 +75,6 @@ function testSnakeMove()
 		"body part not moved correctly",
 		s.body[j]);
 	}
-	console.log(s.body);
 	s = new Snake(4,4,2);
 	for(var i = 0; i < 50 ; i++)
 	{
@@ -127,4 +122,4 @@ function testChangeDirectionSnake()
 	
 }
 
-testChangeDirectionSnake()
+testChangeDirectionSnake();
