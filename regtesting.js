@@ -23,3 +23,9 @@ function regTest1()
 }
 
 regTest1();
+
+function regTest2()
+{
+	var s = new Snake();
+	
+}

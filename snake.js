@@ -74,6 +74,6 @@ function Snake()
 	this.changeDirection = giveChangeDirection(this);
 	this.addBody = giveAddBody(this);
 	this.addXY = giveAddXY(this);
-	this.removeXY = function(){this.body = this.body.pop();}
+	this.removeXY = function(){this.XYQueue = this.XYQueue.pop();}
 	this.move = giveMove(this);
 };

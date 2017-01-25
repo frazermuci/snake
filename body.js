@@ -45,7 +45,7 @@ function giveProgress(body)
 				//dequeues "turning point" if the tail arrives at it
 				if(body.isLast)
 				{
-					snake.XYQueue = snake.XYQueue.pop();
+					snake.removeXY();
 				}
 			}
 		}
