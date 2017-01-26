@@ -1,5 +1,14 @@
 //this is the snake.
-
+//Flyweight this????? So that server can handle it????
+function Snake(x, y, direction)
+{
+	//maybe initialize with two or three and don't pass in
+	this.body = genBodyList(x, y, direction);
+	this.direction = direction;
+	this.changeDirection = giveChangeDirection(this);
+	this.addBody = giveAddBody(this);
+	this.move = giveMove(this);
+};
 
 
 //initializes bodyList
@@ -21,9 +30,7 @@ function genBodyList(x, y, direction)//start at some coords and do not hard code
 }
 
 //generates function addBody which adds body to bodyList
-function giveAddBody(snake)//add in oppo direction of last body. Edge case:
-							//what happens when the last body is on a change direction?
-							//probably just add in oppo direction.
+function giveAddBody(snake)//add in oppo direction of last body. 
 							//edge case what happens when
 							//growth happens and hits a solid object
 							//it would be use alt and make turning point
@@ -75,15 +82,3 @@ function giveChangeDirection(snake)
 	}
 	return func;
 }
-
-
-//Flyweight this????? So that server can handle it????
-function Snake(x, y, direction)
-{
-	//maybe initialize with two or three and don't pass in
-	this.body = genBodyList(x, y, direction);
-	this.direction = direction;
-	this.changeDirection = giveChangeDirection(this);
-	this.addBody = giveAddBody(this);
-	this.move = giveMove(this);
-};

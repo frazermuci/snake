@@ -12,3 +12,19 @@ function giveDrawSnake(snake)
 }
 
 */
+
+/*
+function View(controller)
+{
+	this.controller = controller;
+};
+
+function genGrabState(view)
+{
+	function grabState()
+	{
+		for (let state of view.controller.passModel())
+	}
+	return grabState;
+}
+*/
