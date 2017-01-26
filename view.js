@@ -1,17 +1,5 @@
-/*
-function giveDrawSnake(snake)
-{
-	var func = function()
-	{
-			for(var i = 0; i > snake.body.length; i++)
-			{
-				snake.body[i].draw();
-			}
-	}
-	return func;
-}
-
-*/
+//this is the part of the view that will take the
+//model and displayit
 
 /*
 function View(controller)
@@ -27,4 +15,5 @@ function genGrabState(view)
 	}
 	return grabState;
 }
+view listening -> the part of the view that has all the event handling
 */
