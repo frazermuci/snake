@@ -76,6 +76,7 @@ function giveChangeDirection(snake)
 	return func;
 }
 
+
 //Flyweight this????? So that server can handle it????
 function Snake(x, y, direction)
 {

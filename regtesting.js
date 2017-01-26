@@ -45,11 +45,11 @@ function testSnakeAddBody()
 	var s = new Snake(4,4,4);
 	s.addBody();
 	console.assert(s.body[3].isLast);
+	console.assert(!s.body[2].isLast);
 	console.assert(s.body[3].x == 1 && s.body[3].y == 4);
 }
 
-testSnakeAddBody()
-{}
+testSnakeAddBody();
 
 function testSnakeMove()
 {
