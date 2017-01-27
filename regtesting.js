@@ -43,13 +43,32 @@ testInitSnake();
 function testSnakeAddBody()
 {
 	var s = new Snake(4,4,4);
-	s.addBody();
+	s.addBody([new Body(-500,-300,"black")]);
 	console.assert(s.body[3].isLast);
 	console.assert(!s.body[2].isLast);
 	console.assert(s.body[3].x == 1 && s.body[3].y == 4);
 }
-
 testSnakeAddBody();
+
+function testSnakeAddBodyToAltCoord()
+{
+	var s = new Snake(4,4,4);
+	s.addBody([new Body(1,4,"black")]);
+	console.assert(s.body[3].isLast);
+	console.assert(!s.body[2].isLast);
+	console.assert(s.body[3].x == 2 && s.body[3].y == 3,s.body);
+}
+testSnakeAddBodyToAltCoord();
+
+function testSnakeAddBodyToAltCoordII()
+{
+	var s = new Snake(4,4,4);
+	s.addBody([new Body(1,4,"black"), new Body(2,3,"black")]);
+	console.assert(s.body[3].isLast);
+	console.assert(!s.body[2].isLast);
+	console.assert(s.body[3].x == 2 && s.body[3].y == 5,s.body);
+}
+testSnakeAddBodyToAltCoordII();
 
 function testSnakeMove()
 {
@@ -98,7 +117,9 @@ function testSnakeMove()
 		s.body[j]);
 	}
 }
+
 testSnakeMove();
+
 function testChangeDirectionSnake()
 {
 	var s = new Snake(4,4,4);

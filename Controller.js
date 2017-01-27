@@ -1,4 +1,8 @@
 //while model
+
+//all server does is the same thing as the view, certain things
+//are called upon and that's the dealio. 
+//essentially the 
 function Controller(model)
 {
 	//maybe wrap in init
@@ -24,7 +28,9 @@ function genProgressState(controller)
 {
 	
 	function progressState()
-	{}
+	{return bool if collision}
 	return progressState;
 }
+
+
 */
